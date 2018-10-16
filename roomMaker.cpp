@@ -1,3 +1,4 @@
+
 //Bryan Chang
 //Room creator program
 //TextEg
@@ -16,7 +17,12 @@ struct room {
 
 
 int roomCreator(){
-	string name;
+
+	//const int nameSize = 20;
+	//const int dialogSize = 200;
+	//string name;
+	//string dialog;
+	
 
 	//Create new room object and create pointer to new room
 	room roomA;
@@ -24,23 +30,26 @@ int roomCreator(){
 	proom = &roomA;
 
 
-	cout << "Enter room name: ";
-	//cin.get (cin, proom->title);
+	cout << "Enter room name: " <<endl;
+	//cin >> name; 
+	//getline(cin,name);
+	//roomA.title = name;
 	//cin.ignore();
 	cin >> proom->title;
 	//cout << "Enter room index number:";
-	//getline (cin, proom->roomNum);
+	//cin.getline (proom->roomNum,50);
 	cout << "Enter dialog for room: ";
+	cin >> proom->dialog;
 	//cin.get (cin, proom->dialog);
 	//cin.ignore();
-	cin >> proom->dialog;
+	//cin.getline (proom->dialog, dialogSize);
 
 	//Review room to user
 	cout <<  "" << endl;
 	cout << "" << endl;
 	cout << "Here is the room you've made" << endl;
 	cout << "============================"<< endl;
-	cout << "Room name: "<<  roomA.title << endl;
+	cout << "Room name: "<<  roomA.title  << endl;
 	cout << "Dialog: " << roomA.dialog << endl;
 	
 
