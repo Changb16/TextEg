@@ -17,6 +17,7 @@ void creator()
 
     cin.clear();
     cin.sync();
+    cin.ignore();
 
     cout<<"Enter the name of the game: ";
     getline(cin, game);
@@ -24,9 +25,7 @@ void creator()
     cout<<"Enter the name of the author: ";
     getline(cin, author);
 
-    cout<<"'"<<game<<"' by "<<author<<endl;
-    cout<<endl;
-    cout<<endl;
+    cout<<endl<<"'"<<game<<"' by "<<author<<endl;
 
     file.open((game + ".xml").c_str());
 

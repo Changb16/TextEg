@@ -23,6 +23,7 @@ void writer(string game)
 
     cin.clear();
     cin.sync();
+    cin.ignore();
 
     while(getline(file, line))
     {
@@ -35,12 +36,14 @@ void writer(string game)
 
     while(choice != 0)
     {
-        cout<<"What type of object would you like to create?"<<endl;
-        cout<<"Enter the number of your choice."<<endl;
-        cout<<"==============================================="<<endl;
-        cout<<"1. ROOM - Create a new room object."<< endl;
-        cout<<"0. QUIT - Save project and return to main menu."<<endl;
-        cout<<"==============================================="<<endl;
+        cout<<" ================================================= "<<endl;
+        cout<<"| What type of object would you like to create?   |"<<endl;
+        cout<<"| Enter the number of your choice.                |"<<endl;
+        cout<<"|=================================================|"<<endl;
+        cout<<"| 1. ROOM - Create a new room.                    |"<<endl;
+        cout<<"| 0. QUIT - Save project and return to main menu. |"<<endl;
+        cout<<" ================================================= "<<endl;
+        cout<<"Choice: ";
         cin >> choice;
 
         if(choice == 0)
