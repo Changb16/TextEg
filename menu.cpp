@@ -61,6 +61,13 @@ void menu()
         case 3:
             //open story player
             cout<< "Starting player..."<<endl;
+
+            cin.clear();
+            cin.sync();
+            cin.ignore();
+
+            cout<<"Enter the name of the project to run: ";
+            getline(cin, game);
             int nanosleep(const struct timespec *, struct timespec *);
 
             player(game);
