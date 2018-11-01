@@ -32,8 +32,8 @@ void creator()
     file<<"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"<<endl;
     file<<"<text_adventure>"<<endl;
     file<<endl;
-    file<<"  <game> " + game + " </game>"<<endl;
-    file<<"  <author> " + author + " </author>"<<endl;
+    file<<"  <game>" + game + "</game>"<<endl;
+    file<<"  <author>" + author + "</author>"<<endl;
     file<<endl;
     file<<"</text_adventure>";
 
