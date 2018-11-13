@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text_adventure>
+
+  <game>Kat</game>
+  <author>KMR</author>
+
+  <room>
+    <title>Bedroom</title>
+    <room_num>1</room_num>
+    <description>Connects to living room and kitchen.</description>
+    <connection_1>2</connection_1>
+    <description_1>Go to living room.</description_1>
+    <connection_2>3</connection_2>
+    <description_2>Go to kitchen.</description_2>
+  </room>
+  <room>
+    <title>Living room</title>
+    <room_num>2</room_num>
+    <description>Connects to bedroom.</description>
+    <connection_1>1</connection_1>
+    <description_1>Go to bedroom.</description_1>
+  </room>
+  <room>
+    <title>Kitchen</title>
+    <room_num>3</room_num>
+    <description>Connects to the bedroom and outside.</description>
+    <connection_1>1</connection_1>
+    <description_1>Go to bedroom.</description_1>
+    <connection_2>4</connection_2>
+    <description_2>Go outside.</description_2>
+  </room>
+
+  <room>
+    <title>Outside</title>
+    <room_num>4</room_num>
+    <description>Congrtulations, you went outside.</description>
+  </room>
+
+</text_adventure>
