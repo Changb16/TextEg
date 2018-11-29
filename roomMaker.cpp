@@ -50,9 +50,9 @@ int roomMaker()
 
 //Save inputs to XML
 	temp<<"  <room>"<<endl;
-	temp<<"    <title> " + roomA.title + " </title>"<<endl;
-	temp<<"    <room_num> " + roomA.roomNum + " </room_num>"<<endl;
-	temp<<"    <description> " + roomA.dialog + " </description>"<<endl;
+	temp<<"    <title>" + roomA.title + "</title>"<<endl;
+	temp<<"    <room_num>" + roomA.roomNum + "</room_num>"<<endl;
+	temp<<"    <description>" + roomA.dialog + "</description>"<<endl;
 
 
 	cin.clear();
@@ -73,13 +73,13 @@ int roomMaker()
 
 		cout<<"Enter dialog for choice: ";
 		getline(cin, input);
-		temp<<"    <dialogS_" + in_str.str() + "> " + input + " </dialogS_" + in_str.str() + ">"<<endl;
+		temp<<"    <dialogS_" + in_str.str() + ">" + input + "</dialogS_" + in_str.str() + ">"<<endl;
 
 		//temp<<"   <choice> " + input + " </choice> " << endl;
 
 		cout<<"Enter lua script file name (i.e. script.lua) : ";
 		getline(cin,input);
-		temp<<"    <scriptName_" + in_str.str() + "> " + input + " </scriptName_" + in_str.str() + ">"<<endl;
+		temp<<"    <scriptName_" + in_str.str() + ">" + input + "</scriptName_" + in_str.str() + ">"<<endl;
 		
 		cout<<endl;
  	        cout<<"Would you like to make another script action? [y/n]: ";
@@ -106,11 +106,11 @@ int roomMaker()
 
         cout<<"Enter the index number of the room to connect to: ";
         getline(cin, input);
-        temp<<"    <connection_" + in_str.str() + "> " + input + " </connection_" + in_str.str() + ">"<<endl;
+        temp<<"    <connection_" + in_str.str() + ">" + input + "</connection_" + in_str.str() + ">"<<endl;
 
         cout<<"Enter text for the choice leading to this room: "<<endl;
         getline(cin, input);
-        temp<<"    <description_" + in_str.str() + "> " + input + " </description_" + in_str.str() + ">"<<endl;
+        temp<<"    <description_" + in_str.str() + ">" + input + "</description_" + in_str.str() + ">"<<endl;
 
         cout<<endl;
         cout<<"Would you like to connect another room to this room? [y/n]: ";
