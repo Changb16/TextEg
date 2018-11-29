@@ -6,26 +6,21 @@
 #include <string>
 #include <sstream>
 #include <cstdio>
+#include <vector>
 #include "tinyxml2.h"
 
 using namespace std;
 using namespace tinyxml2;
 
-struct data
-{
-    string title;
-    string author;
-	int roomNum;
-	int testNum;
-	string description;
-};
-
 void player(string game)
 {
     string name = (game + ".xml");
     string title, author, description;
-    int choice = 1, i = 0;
+    int choice = 1, i = 0, a = 0;
+    int roomNum = 0, testNum = 0;
+    vector<int> v;
     stringstream ss;
+    v.push_back(a);
 
     cin.clear();
     cin.sync();
@@ -38,42 +33,47 @@ void player(string game)
     pRoot = project.FirstChildElement("text_adventure");
     XMLElement *pRoom;
     pRoom = pRoot->FirstChildElement("room");
+    XMLElement *pText;
+    XMLElement *pNum;
 
-    data roomA;
-    data * proom;
-    proom = &roomA;
+    title = pRoot->FirstChildElement("game")->GetText();
+    author = pRoot->FirstChildElement("author")->GetText();
 
-    proom->title = pRoot->FirstChildElement("game")->GetText();
-    proom->author = pRoot->FirstChildElement("author")->GetText();
-
-    cout<<"'" + roomA.title + "'" + " by " + roomA.author<<endl<<endl;
+    cout<<"'" + title + "'" + " by " + author<<endl<<endl;
 
     while(choice != 0)
     {
-        proom->title = pRoom->FirstChildElement("title")->GetText();
-        cout<<roomA.title<<endl;
-        proom->description = pRoom->FirstChildElement("description")->GetText();
-        cout<<roomA.description<<endl<<endl;
+        title = pRoom->FirstChildElement("title")->GetText();
+        cout<<title<<endl;
+        description = pRoom->FirstChildElement("description")->GetText();
+        cout<<description<<endl<<endl;
+
+        v.clear();
 
         ss.str("");
         i = 1;
         ss<<i;
-        proom->roomNum = 0;
-        proom->testNum = 0;
-        pRoom = pRoom->FirstChildElement(("description_" + ss.str()).c_str());
+        roomNum = 1;
+        testNum = 0;
+        pText = pRoom->FirstChildElement(("description_" + ss.str()).c_str());
+        pNum = pRoom->FirstChildElement((("connection_") + ss.str()).c_str());
 
-        while(pRoom)
+        while(pText && pNum)
         {
             ss.str("");
             ss<<i;
 
-            proom->description = pRoom->GetText();
-            cout<<ss.str() + ".) " + roomA.description<<endl;
+            description = pText->GetText();
+            a = atoi(pNum->GetText());
+            cout<<ss.str() + ".) " + description<<endl;
+
+            v.push_back(a);
 
             i++;
             ss.str("");
             ss<<i;
-            pRoom = pRoom->NextSiblingElement(("description_" + ss.str()).c_str());
+            pText = pText->NextSiblingElement(("description_" + ss.str()).c_str());
+            pNum = pNum->NextSiblingElement(("connection_" + ss.str()).c_str());
         }
 
         cout<<"0.) Quit playing."<<endl;
@@ -86,27 +86,21 @@ void player(string game)
             ss.str("");
             ss<<choice;
 
-            while(roomA.roomNum == 0)
+            pRoom = pRoot->FirstChildElement("room");
+
+            roomNum = v.at(choice - 1);
+
+            while(roomNum != testNum)
             {
-                pRoom = pRoot->FirstChildElement("room");
-
-                proom->roomNum = atoi(pRoom->FirstChildElement(("connection_" + ss.str()).c_str())->GetText());
+                testNum = atoi(pRoom->FirstChildElement("room_num")->GetText());
+                if(roomNum != testNum)
+                    pRoom = pRoom->NextSiblingElement();
             }
-
-            while(roomA.roomNum != roomA.testNum)
-            {
-                proom->testNum = atoi(pRoom->FirstChildElement("room_num")->GetText());
-                pRoom = pRoom->NextSiblingElement();
-
-                //cout<<roomA.testNum<<endl;
-            }
-
-            pRoom = pRoom->PreviousSiblingElement();
         }
-
-        else
-            break;
     }
+
+    cout<<endl;
+    cout<<"Thank you for playing.";
 
     return;
 }
