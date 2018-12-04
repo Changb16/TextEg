@@ -36,5 +36,5 @@ void runLua(string script){
 	//cout<<"Script end"<<endl;
     }
  
-    return 0;
+    return;
 }
