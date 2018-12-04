@@ -26,7 +26,7 @@ int roomMaker()
     ofstream temp;
     temp.open("temp.xml", ios::app);
 
-//Create new room object and create pointer to new room
+    //Create new room object and create pointer to new room
 	room roomA;
 	room * proom;
 	proom = &roomA;
@@ -35,8 +35,7 @@ int roomMaker()
 	cin.sync();
 	cin.ignore();
 
-
-//Take inputs for room
+    //Take inputs for room
 	cout<<"Enter room name: " <<endl;
 	getline(cin,proom->title);
 
@@ -46,21 +45,17 @@ int roomMaker()
 	cout<<"Enter dialog for room: "<<endl;
 	getline(cin,proom->dialog);
 
-
-
-//Save inputs to XML
+    //Save inputs to XML
 	temp<<"  <room>"<<endl;
 	temp<<"    <title>" + roomA.title + "</title>"<<endl;
 	temp<<"    <room_num>" + roomA.roomNum + "</room_num>"<<endl;
 	temp<<"    <description>" + roomA.dialog + "</description>"<<endl;
 
-
 	cin.clear();
 	cin.sync();
 	cin.ignore();
 
-
-//Add script action
+    //Add script action
 	cout <<"Would you like create a choice with script action? [y/n]: ";
 	getline(cin, choice);
 
@@ -69,7 +64,7 @@ int roomMaker()
 		i++;
 		ostringstream in_str;
 
-		in_str<<1;
+		in_str<<i;
 
 		cout<<"Enter dialog for choice: ";
 		getline(cin, input);
@@ -80,22 +75,20 @@ int roomMaker()
 		cout<<"Enter lua script file name (i.e. script.lua) : ";
 		getline(cin,input);
 		temp<<"    <scriptName_" + in_str.str() + ">" + input + "</scriptName_" + in_str.str() + ">"<<endl;
-		
+
 		cout<<endl;
- 	        cout<<"Would you like to make another script action? [y/n]: ";
-        	getline(cin, choice);
+        cout<<"Would you like to make another script action? [y/n]: ";
+        getline(cin, choice);
 
 	}
 
 	cout<<endl;
-	choice="n";
-	i=0;
+	choice = "n";
+	i = 0;
 
-
-
-//Create room connections
+    //Create room connections
 	cout<<"Would you like to connect a room to this room? [y/n]: ";
-    	getline(cin, choice);
+    getline(cin, choice);
 
     while(choice == "y" || choice == "Y")
     {

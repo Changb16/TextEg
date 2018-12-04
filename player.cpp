@@ -15,8 +15,8 @@ using namespace tinyxml2;
 void player(string game)
 {
     string name = (game + ".xml");
-    string title, author, description;
-    int choice = 1, i = 0, a = 0;
+    string title, author, description, script;
+    int choice = 1, i = 0, a = 0, x = 1, j = 0;
     int roomNum = 0, testNum = 0;
     vector<int> v;
     stringstream ss;
@@ -35,6 +35,8 @@ void player(string game)
     pRoom = pRoot->FirstChildElement("room");
     XMLElement *pText;
     XMLElement *pNum;
+    XMLElement *pScriptText;
+    XMLElement *pScript;
 
     title = pRoot->FirstChildElement("game")->GetText();
     author = pRoot->FirstChildElement("author")->GetText();
@@ -50,13 +52,16 @@ void player(string game)
 
         v.clear();
 
+        x = 1;
         ss.str("");
         i = 1;
         ss<<i;
-        roomNum = 1;
+        roomNum = atoi(pRoom->FirstChildElement("room_num")->GetText());
         testNum = 0;
         pText = pRoom->FirstChildElement(("description_" + ss.str()).c_str());
         pNum = pRoom->FirstChildElement((("connection_") + ss.str()).c_str());
+        pScriptText = pRoom->FirstChildElement((("dialogS_") + ss.str()).c_str());
+        pScript = pRoom->FirstChildElement(("scriptName_" + ss.str()).c_str());
 
         while(pText && pNum)
         {
@@ -65,16 +70,39 @@ void player(string game)
 
             description = pText->GetText();
             a = atoi(pNum->GetText());
+            ss.str("");
+            ss<<x;
             cout<<ss.str() + ".) " + description<<endl;
 
             v.push_back(a);
 
+            x++;
             i++;
             ss.str("");
             ss<<i;
             pText = pText->NextSiblingElement(("description_" + ss.str()).c_str());
             pNum = pNum->NextSiblingElement(("connection_" + ss.str()).c_str());
         }
+
+        i = 1;
+
+        while(pScriptText && pScript)
+        {
+            ss.str("");
+            ss<<x;
+
+            description = pScriptText->GetText();
+            cout<<ss.str() + ".) " + description<<endl;
+
+            x++;
+            i++;
+            ss.str("");
+            ss<<i;
+            pScriptText = pScriptText->NextSiblingElement(("dialogS_" + ss.str()).c_str());
+            pScript = pScript->NextSiblingElement(("scriptName_" + ss.str()).c_str());
+        }
+
+        i = 1;
 
         cout<<"0.) Quit playing."<<endl;
         cout<<endl<<"What action would you like to take?: ";
@@ -86,9 +114,26 @@ void player(string game)
             ss.str("");
             ss<<choice;
 
-            pRoom = pRoot->FirstChildElement("room");
+            if(choice > v.size())
+            {
+                j = 0;
 
-            roomNum = v.at(choice - 1);
+                while(choice != v.size())
+                {
+                    j++;
+                    choice--;
+                }
+
+                ss.str("");
+                ss<<j;
+                pScript = pRoom->FirstChildElement(("scriptName_" + ss.str()).c_str());
+                script = pScript->GetText();
+            }
+
+            else
+                roomNum = v.at(choice - 1);
+
+            pRoom = pRoot->FirstChildElement("room");
 
             while(roomNum != testNum)
             {
@@ -98,9 +143,6 @@ void player(string game)
             }
         }
     }
-
-    cout<<endl;
-    cout<<"Thank you for playing.";
 
     return;
 }
