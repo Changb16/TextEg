@@ -4,7 +4,6 @@
 #include <string>
 
 using namespace std;
-
-int runLua(string);
+void runLua(string);
 
 #endif // RUNLUA_H_INCLUDED
