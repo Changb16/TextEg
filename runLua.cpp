@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <string>
 
 //Include lua headers
 #include "lua.h"
@@ -11,28 +12,28 @@
 
 using namespace std;
 
-int main(int argc, char ** argv){
+void runLua(string script){
 	int cursed=0;
-
+/*
     //iterate all files and execute
     for(int n=1; n<argc; n++){
         char * file = argv[n];
- 
+ */
         //create a new lua state
         lua_State * L = luaL_newstate();
  
         //open all libraries
         luaL_openlibs(L);
 	
-	cout<<"Script start"<<endl;
+	//cout<<"Script start"<<endl;
  	
-        int s = luaL_loadfile(L, file);
+        int s = luaL_loadfile(L, script);
 
 	s = lua_pcall(L, 0, LUA_MULTRET, 0);
  
         lua_close(L);
 
-	cout<<"Scipt end"<<endl;
+	//cout<<"Script end"<<endl;
     }
  
     return 0;
