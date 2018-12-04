@@ -128,6 +128,7 @@ void player(string game)
                 ss<<j;
                 pScript = pRoom->FirstChildElement(("scriptName_" + ss.str()).c_str());
                 script = pScript->GetText();
+		runLua(script);
             }
 
             else
