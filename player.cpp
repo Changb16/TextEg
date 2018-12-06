@@ -7,6 +7,7 @@
 #include <sstream>
 #include <cstdio>
 #include <vector>
+#include "runLua.h"
 #include "tinyxml2.h"
 
 using namespace std;
@@ -129,6 +130,7 @@ void player(string game)
                 pScript = pRoom->FirstChildElement(("scriptName_" + ss.str()).c_str());
                 script = pScript->GetText();
 		runLua(script);
+		cout<<endl;
             }
 
             else

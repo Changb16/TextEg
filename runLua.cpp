@@ -3,37 +3,39 @@
 
 #include <stdio.h>
 #include <iostream>
-
+#include <string>
+/*
 //Include lua headers
 #include "lua.h"
 #include "lauxlib.h"
 #include "lualib.h"
+*/
 
+#include <lua.hpp>
 using namespace std;
 
-int main(int argc, char ** argv){
+void runLua(string script){
 	int cursed=0;
-
-    //iterate all files and execute
-    for(int n=1; n<argc; n++){
-        char * file = argv[n];
  
         //create a new lua state
         lua_State * L = luaL_newstate();
  
-        //open all libraries
-        luaL_openlibs(L);
+        static const luaL_Reg lualibs[] = 
+	{
+	  {"base", luaopen_base},
+	  {NULL, NULL}
+	};
+
+	const luaL_Reg *lib = lualibs;
+	for(; lib->func != NULL; lib++)
+	{
+	  lib->func(L);
+	  lua_settop(L, 0);
+	}
 	
-	cout<<"Script start"<<endl;
- 	
-        int s = luaL_loadfile(L, file);
+	luaL_dofile(L, script.c_str());
 
-	s = lua_pcall(L, 0, LUA_MULTRET, 0);
- 
-        lua_close(L);
+	lua_close(L);
 
-	cout<<"Scipt end"<<endl;
-    }
- 
-    return 0;
+	return;
 }
